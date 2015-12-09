@@ -19,10 +19,13 @@ $(function() {
          * and that the URL is not empty.
          */
          it('have URLs that are defined', function() {
-           for (var i = 0; i < allFeeds.length; i++) {
-             var trimUrl = allFeeds[i].url.trim();
+
+           allFeeds.forEach(function(feed) {
+             var trimUrl = feed.url.trim();
              expect(trimUrl).toBeTruthy();
-           }
+             expect(trimUrl).toBeDefined();
+           });
+
          });
 
         /* This test loops through each feed
@@ -34,9 +37,10 @@ $(function() {
              allFeeds.forEach(function(value, i){
                var name = value.name;
                expect(name).toBeTruthy();
-             })
+               expect(name).toBeDefined();
+             });
 
-         })
+         });
     });
 
     describe('The menu', function(){
@@ -45,8 +49,8 @@ $(function() {
        * hidden by default on page load.
        */
        it('should be hidden by default', function() {
-         expect($("body")).toHaveClass("menu-hidden")
-       })
+         expect($('body')).toHaveClass('menu-hidden');
+       });
 
 
        /* This test ensures that the menu changes
@@ -58,14 +62,14 @@ $(function() {
         it('should toggle visibilty when menu icon is clicked', function(){
 
           $('.menu-icon-link').click();
-          expect($("body")).not.toHaveClass("menu-hidden");
+          expect($('body')).not.toHaveClass('menu-hidden');
 
           $('.menu-icon-link').click();
-          expect($("body")).toHaveClass("menu-hidden");
+          expect($('body')).toHaveClass('menu-hidden');
 
-        })
+        });
 
-    })
+    });
 
     describe('Initial Entries', function(){
 
@@ -79,12 +83,12 @@ $(function() {
        });
 
        it('should load at least one entry', function(done) {
-         var numEntries = $(".feed .entry").length;
+         var numEntries = $('.feed .entry').length;
          expect(numEntries).toBeGreaterThan(0);
          done();
        });
 
-    })
+    });
 
     describe('New Feed Selection', function() {
 
